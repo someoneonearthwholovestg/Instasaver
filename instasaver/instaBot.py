@@ -1,3 +1,4 @@
+#!/usr/local/bin/python3/
 import telebot
 import config
 import datetime
@@ -5,6 +6,7 @@ import datetime
 from parser import saveByURL
 
 bot = telebot.TeleBot(config.token_telegram)
+
 
 def logger(msg):
     if (type(msg) is telebot.types.Message):
@@ -18,23 +20,29 @@ def logger(msg):
     except Exception as ex:
         config.logFile(msg=ex)
 
+
 @bot.message_handler(commands=["start"])
 def greeting(message):
     logger(msg=message)
-    bot.send_message(message.chat.id, text="Hello, {}!".format(message.chat.first_name))
+    bot.send_message(message.chat.id, text=config.greetings.format(message.chat.first_name))
 
-@bot.message_handler(content_types=["text"])
+
+@bot.message_handler(regexp="instagram.com/")
 def urls(message):
     logger(msg=message)
-    if saveByURL(message.text):
-        bot.send_message(message.chat.id, text="SUCCESS!")
-        photo = open("../cat3.jpg", 'rb')
-        bot.send_photo(message.chat.id, photo)
+    urls = saveByURL(message.text)
+    if urls:
+        for url in urls:
+            bot.send_message(message.chat.id, text=url)
+            bot.send_message(message.chat.id, text="SUCCESS!")
     else:
         bot.send_message(message.chat.id, text="FAILURE!")
 
-    
 
+@bot.message_handler(content_types=["text"])
+def other(message):
+    logger(msg=message)
+    bot.send_message(message.chat.id, text="Incorrect url!")
 
 
 if __name__ == '__main__':
