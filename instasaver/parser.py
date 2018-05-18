@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 
 import config
 
-# this code block is belongs to George Gabolaev
+# this code block belongs to George Gabolaev
 GRAPH_SIDECAR_REG_ARGS = '"edge_sidecar_to_children":', '}}}]},"gatekeepers":'
 GRAPH_SINGLE_MEDIA_REG_ARGS = '"shortcode_media":', 'racking_token'
 FROM_TO_REGEX_PATTERN = r'(?<=({})).*(?=({}))'
