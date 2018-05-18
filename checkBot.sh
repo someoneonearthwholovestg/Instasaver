@@ -13,4 +13,4 @@ fi
 
 # chmod +x checkBot.sh
 # -**- in crontab write the following: -**-
-#  * * * * * /home/checkBot.sh
+#  * * * * * /home/instasaver/checkBot.sh
