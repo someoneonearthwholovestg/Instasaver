@@ -1,4 +1,4 @@
-# instasaver
+# Instasaver
 Telegram Bot for downloading photos and videos from Instagram.
 To download the required resource, you need to send a link to this resource.
 
